@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -41,21 +41,21 @@ model Purchase {
   stripeSession String   @unique
   createdAt     DateTime @default(now())
 
-  user          User     @relation(fields: [userId], references: [id])
-  product       Product  @relation(fields: [productId], references: [id])
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Subscription {
-  id                  String   @id @default(cuid())
-  userId              String
-  productId           String
+  id                   String   @id @default(cuid())
+  userId               String
+  productId            String
   stripeSubscriptionId String   @unique
-  status              String
-  currentPeriodEnd    DateTime?
-  createdAt           DateTime @default(now())
+  status               String
+  currentPeriodEnd     DateTime?
+  createdAt            DateTime @default(now())
 
-  user                User     @relation(fields: [userId], references: [id])
-  product             Product  @relation(fields: [productId], references: [id])
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product              Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Log {
@@ -64,7 +64,7 @@ model Log {
   userId    String?
   createdAt DateTime @default(now())
 
-  user      User?    @relation(fields: [userId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
 }
 
 enum ProductType {
