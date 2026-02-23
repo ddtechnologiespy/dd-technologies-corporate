@@ -12,7 +12,8 @@ export default async function UserDetailPage(
 
   const session = await getServerSession(authOptions)
 
-  if (!session || session.user.role !== "ADMIN") {
+  // ✅ Validación segura
+  if (!session?.user || session.user.role !== "ADMIN") {
     redirect("/")
   }
 
@@ -31,6 +32,12 @@ export default async function UserDetailPage(
   // 🔐 PROTEGER ÚLTIMO ADMIN
   async function toggleRole() {
     "use server"
+
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user || session.user.role !== "ADMIN") {
+      redirect("/")
+    }
 
     const adminCount = await prisma.user.count({
       where: { role: "ADMIN" }
@@ -53,10 +60,17 @@ export default async function UserDetailPage(
   async function deleteUser() {
     "use server"
 
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user || session.user.role !== "ADMIN") {
+      redirect("/")
+    }
+
     const adminCount = await prisma.user.count({
       where: { role: "ADMIN" }
     })
 
+    // 🔐 No permitir eliminar el último admin
     if (user.role === "ADMIN" && adminCount <= 1) {
       throw new Error("No puedes eliminar el último administrador")
     }
