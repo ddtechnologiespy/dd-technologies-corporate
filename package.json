@@ -6,12 +6,12 @@
     "node": "24.x"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "prisma generate && prisma migrate deploy && next build",
-    "start": "next start",
-    "lint": "eslint .",
-    "postinstall": "prisma generate"
-  },
+  "dev": "next dev",
+  "build": "prisma generate && next build",
+  "start": "next start",
+  "lint": "eslint .",
+  "postinstall": "prisma generate"
+},
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@prisma/client": "^5.15.0",
