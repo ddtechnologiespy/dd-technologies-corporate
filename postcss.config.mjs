@@ -1,7 +1,6 @@
-const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
+{
+  "compilerOptions": {
+    ...
   },
-};
-
-export default config;
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types"]
+}
