@@ -1,127 +1,181 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center relative overflow-hidden">
+    <main className="relative min-h-screen bg-black text-white overflow-hidden">
 
-      {/* Glow Background */}
-      <div className="absolute w-[800px] h-[800px] bg-cyan-500/20 rounded-full blur-[150px] top-[-200px] animate-pulse"></div>
-      <div className="absolute w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[150px] bottom-[-200px] right-[-200px] animate-pulse"></div>
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/20 to-cyan-900/30 blur-3xl opacity-40"></div>
 
+      {/* Subtle Moving Glow */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="relative z-10 text-center px-6 pt-40"
-      >
+        animate={{ x: [0, 200, 0], y: [0, -100, 0] }}
+        transition={{ duration: 20, repeat: Infinity }}
+        className="absolute top-20 left-1/3 w-[600px] h-[600px] bg-cyan-500/20 blur-[200px] rounded-full"
+      />
 
-        {/* Badge */}
-        <div className="mb-6 inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-cyan-400 backdrop-blur-sm">
-          Global AI Infrastructure
-        </div>
-
-        <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-6">
-          DD Technologies
+      {/* NAVBAR */}
+      <nav className="relative z-20 flex justify-between items-center px-8 py-6">
+        <h1 className="text-2xl font-bold tracking-wider">
+          DD <span className="text-cyan-400">Technologies</span>
         </h1>
 
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-          Plataforma Corporativa Global enfocada en Inteligencia Artificial,
-          Desarrollo de Software, Investigación Avanzada y Expansión Tecnológica.
-        </p>
+        <select className="bg-transparent border border-gray-700 px-3 py-1 rounded-lg text-sm">
+          <option>ES</option>
+          <option>EN</option>
+        </select>
+      </nav>
 
-        {/* Buttons */}
-        <div className="flex gap-6 justify-center mb-14 flex-wrap">
-          <Link href="/empresa">
-            <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-semibold hover:scale-105 transition duration-300 shadow-lg shadow-cyan-500/20">
-              Sobre la Empresa
-            </button>
-          </Link>
+      {/* HERO */}
+      <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-28 pb-32">
 
-          <Link href="/tienda">
-            <button className="px-8 py-4 border border-gray-700 rounded-xl hover:bg-white/5 transition duration-300">
-              Tienda Software
-            </button>
-          </Link>
+        <motion.h1
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-6xl md:text-8xl font-extrabold leading-tight tracking-tight"
+        >
+          Engineering the Future
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400">
+            DD Technologies
+          </span>
+        </motion.h1>
 
-          <Link href="/proyectos">
-            <button className="px-8 py-4 border border-gray-700 rounded-xl hover:bg-white/5 transition duration-300">
-              Proyectos Futuros
-            </button>
-          </Link>
-
-          <Link href="/control">
-            <button className="px-8 py-4 border border-cyan-500 text-cyan-400 rounded-xl hover:bg-cyan-500/10 transition duration-300">
-              Control Center
-            </button>
-          </Link>
-        </div>
-
-        {/* Corporate Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-32">
-          <div>
-            <h3 className="text-3xl font-bold text-cyan-400">12+</h3>
-            <p className="text-gray-500 mt-2">Divisiones Activas</p>
-          </div>
-
-          <div>
-            <h3 className="text-3xl font-bold text-blue-400">3</h3>
-            <p className="text-gray-500 mt-2">Laboratorios en Desarrollo</p>
-          </div>
-
-          <div>
-            <h3 className="text-3xl font-bold text-indigo-400">Global</h3>
-            <p className="text-gray-500 mt-2">Expansión Estratégica</p>
-          </div>
-        </div>
-
-      </motion.div>
-
-      {/* New Corporate Sections */}
-      <section className="relative z-10 grid md:grid-cols-3 gap-10 px-10 pb-32 max-w-6xl w-full">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 1 }}
+          className="mt-8 max-w-2xl text-lg md:text-xl text-gray-400 leading-relaxed"
+        >
+          Artificial Intelligence • Cybersecurity • Advanced Systems • 
+          Corporate Infrastructure.  
+          Building scalable, resilient and intelligent digital ecosystems.
+        </motion.p>
 
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-white/5 border border-white/10 backdrop-blur-lg p-8 rounded-2xl"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
+          className="mt-12 flex gap-6"
         >
-          <h2 className="text-2xl font-bold mb-4 text-cyan-400">Empresa</h2>
-          <p className="text-gray-400 mb-6">
-            Conoce nuestra visión estratégica, misión global y liderazgo tecnológico.
-          </p>
-          <Link href="/empresa" className="text-cyan-400 hover:underline">
-            Ver más →
-          </Link>
-        </motion.div>
+          <button className="px-10 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-105 transition-all duration-300 shadow-xl shadow-cyan-700/40">
+            Explore Vision
+          </button>
 
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-white/5 border border-white/10 backdrop-blur-lg p-8 rounded-2xl"
-        >
-          <h2 className="text-2xl font-bold mb-4 text-blue-400">Tienda</h2>
-          <p className="text-gray-400 mb-6">
-            Explora nuestros softwares, sistemas IA y herramientas empresariales.
-          </p>
-          <Link href="/tienda" className="text-blue-400 hover:underline">
-            Ir a tienda →
-          </Link>
+          <button className="px-10 py-4 rounded-2xl border border-gray-700 hover:border-cyan-400 hover:bg-gray-900 transition-all duration-300">
+            Corporate Labs
+          </button>
         </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-white/5 border border-white/10 backdrop-blur-lg p-8 rounded-2xl"
-        >
-          <h2 className="text-2xl font-bold mb-4 text-indigo-400">Proyectos</h2>
-          <p className="text-gray-400 mb-6">
-            Investigación en IA evolutiva, SaaS multiempresa y expansión global.
-          </p>
-          <Link href="/proyectos" className="text-indigo-400 hover:underline">
-            Descubrir →
-          </Link>
-        </motion.div>
-
       </section>
+
+      {/* TECHNOLOGY GRID */}
+      <section className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="p-10 rounded-3xl bg-gray-900/60 backdrop-blur-xl border border-gray-800 hover:border-cyan-500 transition-all duration-500"
+          >
+            <h3 className="text-2xl font-semibold mb-6 text-cyan-400">
+              Artificial Intelligence
+            </h3>
+            <p className="text-gray-400">
+              Advanced machine learning architectures, predictive systems and 
+              enterprise automation platforms.
+            </p>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="p-10 rounded-3xl bg-gray-900/60 backdrop-blur-xl border border-gray-800 hover:border-purple-500 transition-all duration-500"
+          >
+            <h3 className="text-2xl font-semibold mb-6 text-purple-400">
+              Infrastructure & Cloud
+            </h3>
+            <p className="text-gray-400">
+              High-availability microservices, distributed computing 
+              and global-grade scalable architecture.
+            </p>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="p-10 rounded-3xl bg-gray-900/60 backdrop-blur-xl border border-gray-800 hover:border-blue-500 transition-all duration-500"
+          >
+            <h3 className="text-2xl font-semibold mb-6 text-blue-400">
+              Security & Systems
+            </h3>
+            <p className="text-gray-400">
+              Advanced encryption, cybersecurity frameworks and 
+              enterprise protection systems.
+            </p>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* BOARD & VISION */}
+      <section className="relative z-10 py-32 bg-gradient-to-b from-black to-gray-950 text-center">
+        <div className="max-w-5xl mx-auto px-6">
+
+          <h2 className="text-4xl md:text-5xl font-bold mb-10">
+            Corporate Vision 2035
+          </h2>
+
+          <p className="text-gray-400 text-lg leading-relaxed">
+            DD Technologies is committed to becoming a global technology 
+            corporation operating in artificial intelligence research, 
+            cybersecurity innovation, enterprise infrastructure and 
+            advanced digital ecosystems.
+          </p>
+
+        </div>
+      </section>
+
+      {/* METRICS */}
+      <section className="relative z-10 py-24 text-center">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-12">
+
+          <div>
+            <h3 className="text-5xl font-bold text-cyan-400">99.99%</h3>
+            <p className="text-gray-400 mt-4">System Availability</p>
+          </div>
+
+          <div>
+            <h3 className="text-5xl font-bold text-purple-400">Global</h3>
+            <p className="text-gray-400 mt-4">International Focus</p>
+          </div>
+
+          <div>
+            <h3 className="text-5xl font-bold text-blue-400">AI Core</h3>
+            <p className="text-gray-400 mt-4">Innovation Engine</p>
+          </div>
+
+          <div>
+            <h3 className="text-5xl font-bold text-white">24/7</h3>
+            <p className="text-gray-400 mt-4">Continuous Operation</p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="relative z-10 py-16 text-center border-t border-gray-800">
+        <p className="text-gray-500">
+          © {new Date().getFullYear()} DD Technologies Corporation. All rights reserved.
+        </p>
+      </footer>
 
     </main>
   )
