@@ -9,6 +9,11 @@ export default function AdminPage() {
 
   useEffect(() => {
     const checkRole = async () => {
+      if (!supabase) {
+        console.error("Supabase not configured.");
+        return;
+      }
+
       const { data: userData } = await supabase.auth.getUser();
 
       if (!userData.user) {
